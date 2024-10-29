@@ -26,7 +26,7 @@ paths:
                 type: object
                 properties:
                   cartId:
-                    type: string
+                    type: integer
                     description: Unique identifier for the cart
     delete:
       summary: Delete an existing cart
@@ -35,7 +35,7 @@ paths:
         - in: query
           name: cartId
           schema:
-            type: string
+            type: integer
           required: true
           description: Unique identifier for the cart
       responses:
@@ -52,7 +52,7 @@ paths:
         - in: path
           name: cartId
           schema:
-            type: string
+            type: integer
           required: true
           description: Unique identifier for the cart
       responses:
@@ -73,7 +73,7 @@ paths:
         - in: path
           name: cartId
           schema:
-            type: string
+            type: integer
           required: true
           description: Unique identifier for the cart
       requestBody:
@@ -100,13 +100,13 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the product
         description:
           type: string
           description: Description of the product
         amount:
-          type: number
+          type: integer
           description: Price of the product
     CartDTO:
       type: object

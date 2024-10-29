@@ -1,12 +1,12 @@
 package demo.onebox.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @Data
+@AllArgsConstructor
 public class ProductObj {
     private Integer id;
     private String description;
-    private BigDecimal amount;
+    private Integer amount;
 }

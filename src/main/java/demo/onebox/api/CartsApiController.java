@@ -18,7 +18,7 @@ public class CartsApiController implements CartsApi {
     private final ICartApiMapper cartApiMapper;
 
     @Override
-    public ResponseEntity<CartDTO> cartsCartIdGet(String cartId) throws Exception {
+    public ResponseEntity<CartDTO> cartsCartIdGet(Integer cartId) throws Exception {
         return new ResponseEntity<>(
             cartApiMapper.cartObjToCartDto(
                 cartService.getCartById(cartId)
@@ -27,7 +27,7 @@ public class CartsApiController implements CartsApi {
     }
 
     @Override
-    public ResponseEntity<CartDTO> cartsCartIdProductsPost(String cartId, List<ProductDTO> productDTO) throws Exception {
+    public ResponseEntity<CartDTO> cartsCartIdProductsPost(Integer cartId, List<ProductDTO> productDTO) throws Exception {
         return new ResponseEntity<>(
             cartApiMapper.cartObjToCartDto(
                 cartService.addProductsById(cartId,
@@ -39,22 +39,19 @@ public class CartsApiController implements CartsApi {
 
 
     @Override
-    public ResponseEntity<Void> cartsDelete(String cartId) throws Exception {
+    public ResponseEntity<Void> cartsDelete(Integer cartId) throws Exception {
         cartService.deleteCart(cartId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<CartsPost201Response> cartsPost(List<ProductDTO> productDTO) throws Exception {
-        return null;
-    }
-
-
-    public ResponseEntity<CartsPost201Response> cartsPost() throws Exception {
         return new ResponseEntity<>(
-            cartApiMapper.idStringToResponse(
-                cartService.createCart()
+            cartApiMapper.idToResponse(
+                cartService.createCart(
+                        cartApiMapper.productDtoToProductObj(productDTO)
+                )
             ),
-        HttpStatus.OK);
+            HttpStatus.OK);
     }
 }
