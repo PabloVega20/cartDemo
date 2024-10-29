@@ -6,8 +6,8 @@ import demo.onebox.domain.ProductObj;
 import java.util.List;
 
 public interface ICartService {
-    void deleteCart(Integer cartId);
-    String createCartById(Integer cartId);
-    CartObj getCartById(Integer cartId);
-    CartObj addProductsById(Integer cartId, List<ProductObj> products);
+    void deleteCart(String cartId);
+    String createCart();
+    CartObj getCartById(String cartId);
+    CartObj addProductsById(String cartId, List<ProductObj> products);
 }

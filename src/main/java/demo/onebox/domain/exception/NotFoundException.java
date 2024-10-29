@@ -1,27 +1,25 @@
-package es.fudontime.domain.exception;
+package demo.onebox.domain.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Excepcion raiz lanzada por la aplicacion cuando existe un error general.
+ * Custom exception 404 not found
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 public class NotFoundException extends Exception {
-
-	/** Código de la excepción. */
 	private final String code;
 
 	/**
-	 * Crea una nueva instancia de la clase GeneralException.java. <br>
+	 * Create a new NotFoundException
 	 *
 	 * @param code
-	 * 		código de la excepción a propagar.
+	 * 		code of the exception
 	 * @param msg
-	 * 		la cadena con el mensaje de la excepcion a propagar
+	 * 		message of the exception
 	 */
 	public NotFoundException(String code, String msg) {
 		super(msg);

@@ -9,6 +9,14 @@ paths:
     post:
       summary: Create a new cart
       description: Creates a new shopping cart.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductDTO'
       responses:
         '201':
           description: Cart created successfully
@@ -18,7 +26,7 @@ paths:
                 type: object
                 properties:
                   cartId:
-                    type: integer
+                    type: string
                     description: Unique identifier for the cart
     delete:
       summary: Delete an existing cart
@@ -27,7 +35,7 @@ paths:
         - in: query
           name: cartId
           schema:
-            type: integer
+            type: string
           required: true
           description: Unique identifier for the cart
       responses:
@@ -44,7 +52,7 @@ paths:
         - in: path
           name: cartId
           schema:
-            type: integer
+            type: string
           required: true
           description: Unique identifier for the cart
       responses:
@@ -65,7 +73,7 @@ paths:
         - in: path
           name: cartId
           schema:
-            type: integer
+            type: string
           required: true
           description: Unique identifier for the cart
       requestBody:
@@ -79,6 +87,10 @@ paths:
       responses:
         '200':
           description: Products added to cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
         '404':
           description: Cart not found
 
@@ -88,7 +100,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           description: Unique identifier for the product
         description:
           type: string
@@ -100,7 +112,7 @@ components:
       type: object
       properties:
         cartId:
-          type: integer
+          type: string
           description: Unique identifier for the cart
         products:
           type: array

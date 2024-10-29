@@ -15,22 +15,23 @@ public class CartService implements ICartService {
     private final ICartDao cartAdapter;
 
     @Override
-    public void deleteCart(Integer cartId) {
+    public void deleteCart(String cartId) {
         cartAdapter.deleteById(cartId);
     }
 
     @Override
-    public String createCartById(Integer cartId) {
-        return cartAdapter.createCartById(cartId);
+    public String createCart() {
+        return cartAdapter.createCart();
     }
 
+
     @Override
-    public CartObj getCartById(Integer cartId) {
+    public CartObj getCartById(String cartId) {
         return cartAdapter.getCartById(cartId);
     }
 
     @Override
-    public CartObj addProductsById(Integer cartId, List<ProductObj> products) {
+    public CartObj addProductsById(String cartId, List<ProductObj> products) {
         return cartAdapter.addProductsById(cartId,products);
     }
 }
