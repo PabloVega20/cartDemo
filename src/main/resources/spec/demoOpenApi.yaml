@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Demo Onebox
+  description: A simple demo Onebox for managing shopping carts and products.
+  version: 1.0.0
+
+paths:
+  /carts:
+    post:
+      summary: Create a new cart
+      description: Creates a new shopping cart.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductDTO'
+      responses:
+        '201':
+          description: Cart created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cartId:
+                    type: integer
+                    description: Unique identifier for the cart
+  /carts/{cartId}:
+    delete:
+      summary: Delete an existing cart
+      description: Deletes the specified cart by its ID.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: integer
+          required: true
+          description: Unique identifier for the cart
+      responses:
+        '204':
+          description: Cart deleted successfully
+        '404':
+          description: Cart not found
+    get:
+      summary: Get cart information
+      description: Retrieves the details of a cart, including its products, given the cart ID.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: integer
+          required: true
+          description: Unique identifier for the cart
+      responses:
+        '200':
+          description: Cart information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
+        '404':
+          description: Cart not found
+
+  /carts/{cartId}/products:
+    post:
+      summary: Add products to cart
+      description: Adds one or more products to the specified cart.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: integer
+          required: true
+          description: Unique identifier for the cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProductDTO'
+      responses:
+        '200':
+          description: Products added to cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
+        '404':
+          description: Cart not found
+
+components:
+  schemas:
+    ProductDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the product
+        description:
+          type: string
+          description: Description of the product
+        amount:
+          type: integer
+          description: Price of the product
+    CartDTO:
+      type: object
+      properties:
+        cartId:
+          type: string
+          description: Unique identifier for the cart
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDTO'
