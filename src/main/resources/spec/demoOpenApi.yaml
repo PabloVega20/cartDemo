@@ -28,11 +28,12 @@ paths:
                   cartId:
                     type: integer
                     description: Unique identifier for the cart
+  /carts/{cartId}:
     delete:
       summary: Delete an existing cart
       description: Deletes the specified cart by its ID.
       parameters:
-        - in: query
+        - in: path
           name: cartId
           schema:
             type: integer
@@ -43,8 +44,6 @@ paths:
           description: Cart deleted successfully
         '404':
           description: Cart not found
-
-  /carts/{cartId}:
     get:
       summary: Get cart information
       description: Retrieves the details of a cart, including its products, given the cart ID.

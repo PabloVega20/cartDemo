@@ -18,6 +18,12 @@ public class CartsApiController implements CartsApi {
     private final ICartApiMapper cartApiMapper;
 
     @Override
+    public ResponseEntity<Void> cartsCartIdDelete(Integer cartId) throws Exception {
+        cartService.deleteCart(cartId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<CartDTO> cartsCartIdGet(Integer cartId) throws Exception {
         return new ResponseEntity<>(
             cartApiMapper.cartObjToCartDto(
@@ -35,13 +41,6 @@ public class CartsApiController implements CartsApi {
                 )
             ),
         HttpStatus.OK);
-    }
-
-
-    @Override
-    public ResponseEntity<Void> cartsDelete(Integer cartId) throws Exception {
-        cartService.deleteCart(cartId);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
